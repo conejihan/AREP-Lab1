@@ -24,7 +24,7 @@ public class App
 
     /**
      * Devuelve el puerto que usara la API
-     * @return int -> número de puerto
+     * @return int número de puerto
      */
     static int getPort() {
         if (System.getenv("PORT") != null) {
