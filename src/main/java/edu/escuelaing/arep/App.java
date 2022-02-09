@@ -1,8 +1,8 @@
 package edu.escuelaing.arep;
 
-import static spark.Spark.get;
-import static spark.Spark.port;
 import edu.escuelaing.arep.service.ConvertService;
+
+import static spark.Spark.*;
 
 public class App
 {
@@ -14,6 +14,10 @@ public class App
      */
     public static void main(String[] args) {
         port(getPort());
+        after((request, response) -> {
+            response.header("Access-Control-Allow-Origin", "*");
+            response.header("Access-Control-Allow-Methods", "GET");
+        });
         get("/celsius/:temp", "application/json",(req, res) -> convert.celsiusFahrenheit(Float.parseFloat(":temp")));
         get("/fahrenheit/:temp", "application/json",(req, res) -> convert.fahrenheitCelsius(Float.parseFloat(":temp")));
     }
